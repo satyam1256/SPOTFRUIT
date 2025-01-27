@@ -4,7 +4,6 @@ const emailValidator = require('email-validator');
 require('dotenv').config({ path: './.env' });
 
 
-// const db_link = "mongodb+srv://satyamstudentmin21:vxDYPEbYTuhOgHNK@cluster0.dvuek.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const db_link = process.env.DB_LINK;
 console.log('DB Link:', db_link);
 
