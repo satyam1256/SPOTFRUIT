@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const emailValidator = require('email-validator');
+require('dotenv').config({ path: './.env' });
 
 
-const db_link = 'mongodb+srv://Satyam:t8VIYsm9uBA6TBev@atlascluster.abyxohe.mongodb.net/?retryWrites=true&w=majority&appName=AtlasCluster' ;
+// const db_link = "mongodb+srv://satyamstudentmin21:vxDYPEbYTuhOgHNK@cluster0.dvuek.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const db_link = process.env.DB_LINK;
+console.log('DB Link:', db_link);
 
 
 mongoose.connect(db_link)
-.then((db)=>{
-    // console.log(db);
-    console.log('connected to database');
-}).catch((err)=>{
-    console.log('error in connecting to database');
-});
-
+    .then(() => {
+        console.log('Connected to database');
+    })
+    .catch((err) => {
+        console.error("Error connecting to database:");
+    });
 
 
 // Define the user schema
@@ -24,11 +26,11 @@ const userSchema = new mongoose.Schema({
         unique: true,
         trim: true,
     },
-    email : {
-        type :String,
-        required : true,
-        unique : true,
-        validate: function(email) {
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        validate: function (email) {
             return emailValidator.validate(email);
         },
         trim: true,
